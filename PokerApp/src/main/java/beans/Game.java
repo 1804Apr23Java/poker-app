@@ -230,6 +230,26 @@ public class Game {
 			GameStates g = gameStatesService.getGameStatesById(gameId);
 			currentTurn = g.getCurrentTurn();
 			
+			if(currentTurn > players.size()-1) {
+				currentTurn = 0;
+				g.setCurrentTurn(0);
+				gameStatesService.updateGameState(g);
+			} else if(playerHands.get(currentTurn).isHasFolded()) {
+				
+				while(playerHands.get(currentTurn).isHasFolded()) {
+					currentTurn++;
+					if(currentTurn > players.size()-1) {
+						currentTurn = 0;
+						g.setCurrentTurn(currentTurn);
+						gameStatesService.updateGameState(g);
+						return;
+					}
+				}			
+			}
+			
+			g.setCurrentTurn(currentTurn);
+			gameStatesService.updateGameState(g);
+			
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
