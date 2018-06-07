@@ -83,7 +83,7 @@ public class CurrentHandsController {
 
 	@CrossOrigin
 	@RequestMapping(value = "/action", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public void userAction(@RequestBody MultiValueMap<String, String> formParams, HttpServletRequest request,
+	public ResponseEntity<CurrentHands> userAction(@RequestBody MultiValueMap<String, String> formParams, HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("form params received " + formParams);
 
@@ -120,5 +120,6 @@ public class CurrentHandsController {
 			System.out.println(currentHand);
 		}
 
+		return new ResponseEntity<>(currentHand, HttpStatus.OK);
 	}
 }
