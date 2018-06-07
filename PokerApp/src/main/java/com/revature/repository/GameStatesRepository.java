@@ -43,27 +43,18 @@ public class GameStatesRepository {
 
 	public void updateGameState(GameStates g) {
 		Session s = sessionFactory.getCurrentSession();
-		Transaction tx = s.beginTransaction();
 		s.update(g);
-		tx.commit();
-		s.close();
 	}
 
 	public void deleteGameState(GameStates g) {
 		Session s = sessionFactory.getCurrentSession();
-		Transaction tx = s.beginTransaction();
 		s.delete(g);
-		tx.commit();
-		s.close();
 	}
 	
 	public void transferWinnings(GameStates g, CurrentHands c) {
 		Session s = sessionFactory.getCurrentSession();
-		Transaction tx = s.beginTransaction();
 		c.setWinnings(c.getWinnings() + g.getPot());
 		s.update(c);
-		tx.commit();
-		s.close();
 	}
 	
 	public int getCurrentTurn(GameStates g) {

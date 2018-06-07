@@ -42,18 +42,12 @@ public class AdminsRepository {
 
 	public void updateAdmin(Admins a) {
 		Session s = sessionFactory.getCurrentSession();
-		Transaction tx = s.beginTransaction();
 		s.update(a);
-		tx.commit();
-		s.close();
 	}
 
 	public void deleteAdmin(Admins a) {
 		Session s = sessionFactory.getCurrentSession();
-		Transaction tx = s.beginTransaction();
 		s.delete(a);
-		tx.commit();
-		s.close();
 	}
 
 }

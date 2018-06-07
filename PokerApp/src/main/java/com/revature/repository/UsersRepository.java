@@ -59,18 +59,12 @@ public class UsersRepository {
 
 	public void updateUser(Users u) {
 		Session s = sessionFactory.getCurrentSession();
-		Transaction tx = s.beginTransaction();
 		s.update(u);
-		tx.commit();
-		s.close();
 	}
 
 	public void deleteUser(Users u) {
 		Session s = sessionFactory.getCurrentSession();
-		Transaction tx = s.beginTransaction();
 		s.delete(u);
-		tx.commit();
-		s.close();
 	}
 
 	public ArrayList<Users> getUsersWithGameId(int id) {

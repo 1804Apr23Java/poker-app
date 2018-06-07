@@ -59,18 +59,12 @@ public class StatsRepository {
 
 	public void updateStat(Stats st) {
 		Session s = sessionFactory.getCurrentSession();
-		Transaction tx = s.beginTransaction();
 		s.update(st);
-		tx.commit();
-		s.close();
 	}
 
 	public void deleteStat(Stats st) {
 		Session s = sessionFactory.getCurrentSession();
-		Transaction tx = s.beginTransaction();
 		s.delete(st);
-		tx.commit();
-		s.close();
 	}
 
 }

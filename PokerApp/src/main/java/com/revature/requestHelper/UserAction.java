@@ -3,6 +3,7 @@ package com.revature.requestHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.revature.beans.CurrentHands;
+import com.revature.beans.GameStates;
 import com.revature.service.CurrentHandsService;
 import com.revature.service.GameStatesService;
 
@@ -17,11 +18,16 @@ public class UserAction {
 	public static String checkUserAction(String action, CurrentHands currentHand) {
 		// Increment Player Order
 		currentHand.getUser().getGameStates().setCurrentTurn(currentHand.getPlayerOrder() + 1);
+		System.out.println(currentHand.getUser().getGameStates().getCurrentTurn());
 
 		if (action.equals("check")) {
 			// Do nothing
 			// Save changes to DB
+//			System.out.println(currentHand.getUser().getGameStates());
+//			GameStates g = currentHand.getUser().getGameStates();
 			gameStatesService.updateGameState(currentHand.getUser().getGameStates());
+			System.out.println(currentHand.getUser().getGameStates().getCurrentTurn());
+			
 			System.out.println("User has checked!");
 			return "OK, Check";
 		} else if (action.equals("bet")) {
