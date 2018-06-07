@@ -1,6 +1,7 @@
 package com.revature.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -20,7 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.revature.beans.CurrentHands;
+import com.revature.beans.FullGameState;
 import com.revature.beans.Stats;
+import com.revature.beans.Users;
 import com.revature.service.StatsService;
 
 @Controller("statsController")
@@ -72,5 +76,4 @@ public class StatsController extends HttpServlet {
 		resp = new ResponseEntity<>(stat, HttpStatus.OK);
 		return resp;
 	}
-
 }

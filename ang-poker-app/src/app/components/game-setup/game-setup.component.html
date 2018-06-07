@@ -1,0 +1,39 @@
+<div class="container mt-5">
+
+  <div class="row justify-content-center">
+    <div class="col-md-6 ">
+      <div class="card">
+        <header class="card-header">
+          <h4 class="card-title mt-2">Create New Game</h4>
+        </header>
+        <article class="card-body">
+          <form id="inviteFriendsForm" onsubmit="this.submit()" action="gameSetup" method="POST" [formGroup]="inviteFriendsForm">
+            <div class="form-group">
+              <label for="friendsToInvite" class="">Invite Friends</label>
+              <!-- <input readonly [(ngModel)]="this.friendsToInvite" [ngModelOptions]="{standalone: true}" name="friendsToInvite" type="text" class="form-control" id="friendsToInvite" value="{{this.friendsToInvite}}"> -->
+              <input name="friendsToInvite" type="text" class="form-control" id="friendsToInvite" value="{{this.friendsToInvite}}" readonly required> <!-- formControlName="friendsToInvite" -->
+
+            </div>
+            <div class="form-group">
+              <input name="friend" [(ngModel)]="query" [ngModelOptions]="{standalone: true}" type="text" class="form-control" id="invFriendsInput" placeholder="Invite Friends">
+              <ul id="filerUsers" class="list-group mt-3">
+                <li [class.list-group-item-success]="this.friendsToInvite.includes(user.username)" (click)="addFriendsToArr(user)" class="list-group-item list-group-item-action" *ngFor="let user of users | filterUsername:query">{{user.username}}</li>
+              </ul>
+            </div>
+
+            <div class="form-group">
+              <label>Game Time Limit</label>
+              <input class="form-control" type="number" name="timeLimit" placeholder="Time Limit" formControlName="timeLimit" required>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-block" [disabled]="!inviteFriendsForm.valid">Invite Friends</button>
+            </div>
+          </form>
+
+        </article>
+      </div>
+
+    </div>
+
+  </div>
+</div>

@@ -16,7 +16,7 @@
 	<!-- H2 datasource -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.h2.Driver"/>
-		<property name="url" value="jdbc:h2:mem:test:DB_CLOSE_DELAY = -1"/>
+		<property name="url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
 	</bean>
 	
 	<!-- session factory  -->
@@ -28,8 +28,7 @@
 				<prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
-				<prop key="hibernate.hbm2ddl.import_files">PokerAppH2.sql</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
 			</props>
 		</property>
 	</bean>

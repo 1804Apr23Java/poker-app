@@ -1,22 +1,17 @@
 import { GameState } from './game-state.model';
 
 export class UserInfo {
-  userId: Number;
+  userId: number;
   gameStates: GameState;
-  email: String;
-  password: String;
-  firstName: String;
-  lastName: String;
-  username: String;
-  isHost: Boolean;
-  // public wins: Number;
-  // public losses: Number;
-  // public winnings: Number;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  username: string;
+  isHost: boolean;
 
-
-//  constructor(username: String, firstname: String, lastname: String, email: String, wins: Number, losses: Number, winnings: Number) {
-constructor(userId: Number, gameStates: GameState, username: String, firstName: String, lastName: String,
-email: String, password: String, isHost: Boolean) {
+constructor(userId: number, gameStates: GameState, username: string, firstName: string, lastName: string,
+email: string, password: string, isHost: boolean) {
       this.userId = userId;
       this.gameStates = gameStates;
       this.username = username;
@@ -24,9 +19,6 @@ email: String, password: String, isHost: Boolean) {
       this.lastName = lastName;
       this.email = email;
       this.password = password;
-      // this.wins = wins;
-      // this.losses = losses;
-      // this.winnings = winnings;
       this.isHost = isHost;
 
   }

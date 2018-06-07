@@ -2,13 +2,13 @@
 <div class="container">
   <div class="row align-items-start mt-5">
     <div class="col">
-      <h3 class="textOnBgColor">Wins: 10</h3>
+      <h3 class="textOnBgColor">Wins: {{ userInfo.wins }}</h3>
     </div>
     <div class="col">
-      <h3 class="textOnBgColor">Losses: 10</h3>
+      <h3 class="textOnBgColor">Losses: {{ userInfo.losses }}</h3>
     </div>
     <div class="col">
-      <h3 class="textOnBgColor">Win/Loss Ratio: 1</h3>
+      <h3 class="textOnBgColor">Win/Loss Ratio: {{ (userInfo.losses === 0) ? 0 : (userInfo.wins / userInfo.losses) }}</h3>
     </div>
   </div>
   <div class="row align-items-start mt-5">
@@ -26,9 +26,9 @@
     <div class="col">
       <div class="card" style="width: 18rem;">
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Username: <span class="ml-3"><strong>{{ userInfo.username }}</strong></span></li>
-          <li class="list-group-item">Name: <span class="ml-3"><strong>{{ userInfo.firstName + " " + userInfo.lastName }}</strong></span></li>
-          <li class="list-group-item">Email: <span class="ml-3"><strong>{{ userInfo.email }}</strong></span></li>
+          <li class="list-group-item">Username: <span class="ml-3"><strong>{{ userInfo.user.username }}</strong></span></li>
+          <li class="list-group-item">Name: <span class="ml-3"><strong>{{ userInfo.user.firstName + " " + userInfo.user.lastName }}</strong></span></li>
+          <li class="list-group-item">Email: <span class="ml-3"><strong>{{ userInfo.user.email }}</strong></span></li>
         </ul>
         <button type="button" routerLink="/edit-email" class="btn btn-primary mt-3">Update Email</button>
         <button type="button" routerLink="/edit-password"  class="btn btn-primary mt-3">Update Password</button>

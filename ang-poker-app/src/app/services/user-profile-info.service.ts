@@ -16,6 +16,6 @@ export class UserProfileInfoService {
   constructor(private httpClient: HttpClient) { }
 
   public fetchUserInformation(): Observable<UserInfo> {
-    return this.httpClient.get<UserInfo>('http://localhost:8087/PokerApp/users/all');
+    return this.httpClient.get<UserInfo>('http://pokerapp.cfapps.io/users/all');
   }
 }

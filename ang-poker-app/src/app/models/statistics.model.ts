@@ -1,10 +1,15 @@
+import { UserInfo } from './user-info.model';
+import { GameState } from '../models/game-state.model';
+
 export class Statistics {
 
-  public totalWinnings: Number;
-  public wins: Number;
-  public losses: Number;
+  user: UserInfo;
+  totalWinnings: number;
+  wins: number;
+  losses: number;
 
-  constructor (totalWinnings: Number, wins: Number, losses: Number) {
+  constructor(user: UserInfo, totalWinnings: number, wins: number, losses: number) {
+    this.user = user;
     this.totalWinnings = totalWinnings;
     this.wins = wins;
     this.losses = losses;

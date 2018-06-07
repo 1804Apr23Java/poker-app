@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // components
 import { AppComponent } from './app.component';
@@ -14,6 +15,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { EditPasswordComponent } from './components/edit-password/edit-password.component';
 import { GameboardComponent } from './components/gameboard/gameboard.component';
+import { GameSetupComponent } from './components/game-setup/game-setup.component';
+import { FilterUsernamePipe } from './pipes/filter-username.pipe';
 
 
 @NgModule({
@@ -26,12 +29,16 @@ import { GameboardComponent } from './components/gameboard/gameboard.component';
     UserProfileComponent,
     EditProfileComponent,
     EditPasswordComponent,
+    GameSetupComponent,
+    FilterUsernamePipe,
     GameboardComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [ ],
   providers: [],

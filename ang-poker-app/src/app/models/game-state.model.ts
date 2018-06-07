@@ -1,13 +1,13 @@
 export class GameState {
-  game_Id: Number;
+  game_Id: number;
   deckState: any;
-  currentTurn: Number;
-  pot: Number;
-  status: Number;
-  timeLeft: Number;
+  currentTurn: number;
+  pot: number;
+  status: number;
+  timeLeft: number;
   tableState: any;
 
-  constructor(game_Id: Number, deckState: any, currentTurn: Number, pot: Number, status: Number, timeLeft: Number, tableState: any) {
+  constructor(game_Id: number, deckState: any, currentTurn: number, pot: number, status: number, timeLeft: number, tableState: any) {
     this.game_Id = game_Id;
     this.deckState = deckState;
     this.currentTurn = currentTurn;

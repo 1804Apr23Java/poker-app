@@ -1,16 +1,18 @@
+import { UserInfo } from './user-info.model';
+
 export class CurrentHand {
 
-  public hand: any;
-  public winnings: Number;
-  public hasFolded: any;
-  public playerOrder: Number;
+  user: UserInfo;
+  hand: any;
+  winnings: number;
+  hasFolded: boolean;
+  playerOrder: number;
 
-  constructor(hand: any, winnings: Number, hasFolded: any, playerOrder: Number) {
-
+  constructor(user: UserInfo, hand: any, winnings: number, hasFolded: boolean, playerOrder: number) {
+    this.user = user;
     this.hand = hand;
     this.winnings = winnings;
     this.hasFolded = hasFolded;
     this.playerOrder = playerOrder;
-
   }
 }

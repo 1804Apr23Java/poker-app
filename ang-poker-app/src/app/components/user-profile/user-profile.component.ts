@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UserProfileInfoService } from '../../services/user-profile-info.service';
-import { UserInfo } from '../../models/user-info.model';
+import { UserStatsService } from '../../services/user-stats.service';
 import { GameState } from '../../models/game-state.model';
+import { Statistics } from '../../models/statistics.model';
+import { UserInfo } from '../../models/user-info.model';
+import { NavBarService } from '../../services/nav-bar.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -12,22 +14,23 @@ import { GameState } from '../../models/game-state.model';
 export class UserProfileComponent implements OnInit {
 
   public gameState: GameState = null;
-  public userInfo: UserInfo = new UserInfo(1, this.gameState, 'username', 'firstname', 'lastname', 'email', 'password', null);
+  public userInfo: Statistics;
 
-  constructor(private userInfoService: UserProfileInfoService) { }
+  constructor(private userStatsService: UserStatsService, public nav: NavBarService) { }
+
   getUserInformation(): void {
-    this.userInfoService.fetchUserInformation()
+    this.userStatsService.fetchStatsInformation()
       .subscribe(
-        (userInfo: UserInfo) => {
+        (userInfo: Statistics) => {
           this.userInfo = userInfo;
+          console.log(this.userInfo);
         },
-        error => { console.log(`Error: ${error}`); }
+        error => { console.log(error); }
       );
   }
 
-  // https://stackoverflow.com/questions/44472150/no-access-control-allow-origin-header-is-present-on-the-requested-resource-i
-
   ngOnInit() {
+    this.nav.show();
     this.getUserInformation();
   }
 
