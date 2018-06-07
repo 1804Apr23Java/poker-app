@@ -56,18 +56,12 @@ public class CurrentHandsRepository {
 
 	public void updateCurrentHand(CurrentHands h) {
 		Session s = sessionFactory.getCurrentSession();
-		Transaction tx = s.beginTransaction();
 		s.update(h);
-		tx.commit();
-		s.close();
 	}
 
 	public void deleteCurrentHand(CurrentHands h) {
 		Session s = sessionFactory.getCurrentSession();
-		Transaction tx = s.beginTransaction();
 		s.delete(h);
-		tx.commit();
-		s.close();
 	}
 
 }
