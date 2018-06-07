@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavBarService } from '../../services/nav-bar.service';
 import { Statistics } from '../../models/statistics.model';
+import { UserDecision } from '../../models/user-decision.model';
 import { UserStatsService } from '../../services/user-stats.service';
-
+import { UserActionService } from '../../services/user-action.service';
 import { Player } from '../../models/Player';
 
 @Component({
@@ -37,7 +38,7 @@ export class GameboardComponent implements OnInit {
 
   private pot: number;
 
-  constructor(public nav: NavBarService, private userStatsService: UserStatsService) {
+  constructor(public nav: NavBarService, private userStatsService: UserStatsService, private userActionService: UserActionService) {
   }
 
   // userid: this.userInfo.user.userId
@@ -72,21 +73,26 @@ export class GameboardComponent implements OnInit {
     this.refreshBoard();
   }
 
-  public userAction(action) {
-    // if (this.user.turnOrder !== this.currentTurnOrder) {
-    //   return;
-    // }
+  // public userAction(action) {
+  //   if (this.user.turnOrder !== this.currentTurnOrder) {
+  //     return;
+  //   }
+  //
+  //   const url = 'https://pokerapp.cfapps.io/currentHands/action';
+  //   const xhr = new XMLHttpRequest();
+  //
+  //   xhr.open('POST', url, true);
+  //   xhr.onreadystatechange = function() {
+  //     if (this.readyState === 4 && this.status === 200) { }
+  //     console.log(action)
+  //
+  //     xhr.send(action);
+  //   };
+  // }
 
-    const url = 'https://pokerapp.cfapps.io/currentHands/action';
-    const xhr = new XMLHttpRequest();
-
-    xhr.open('POST', url, true);
-    xhr.onreadystatechange = function() {
-      if (this.readyState === 4 && this.status === 200) { }
-      console.log(action)
-
-      xhr.send(action);
-    };
+  public userAction(decision: string) {
+    const userDecision: UserDecision = new UserDecision(decision);
+    this.userActionService.postUserDecision(userDecision).subscribe(message => console.log(message));
   }
 
   drawPot() {
