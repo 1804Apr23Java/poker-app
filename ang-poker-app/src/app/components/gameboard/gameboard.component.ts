@@ -14,6 +14,7 @@ import { Player } from '../../models/Player';
 export class GameboardComponent implements OnInit {
 
   public userInfo: Statistics;
+  public currentTurnOrder: number;
 
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
@@ -49,7 +50,7 @@ export class GameboardComponent implements OnInit {
     this.setCanvas(<HTMLCanvasElement> document.getElementById('thisCanvas'));
     this.drawBoardBackground();
 
-    let user = new Player("Jack77", "Check", "$1000", ["JH", "7H"]);
+    let user = new Player("Jack77", "Check", "$1000", ["JH", "7H"], 0);
     this.setUser(user);
 
     this.drawUserHand();
@@ -59,16 +60,33 @@ export class GameboardComponent implements OnInit {
     this.setBoard(board);
     this.drawBoard();
 
-    let p = [ new Player("Jack777777777777777", "Check", "$1000", ["KD", "6S"]),
-              new Player("Jane01", "Raise 250", "$1500", ["BC", "BC"]),
-              new Player("Rob25", "fold", "$275", ["BC", "BC"]),
-              new Player("Sue182", "fold", "$990", ["BC", "BC"]),
-              new Player("Jack77", "Check", "$1000", ["GC", "GC"]),
-              new Player("Jack77", "Check", "$1000", ["BC", "BC"])];
+    let p = [ new Player("Jack777777777777777", "Check", "$1000", ["KD", "6S"], 1),
+              new Player("Jane01", "Raise 250", "$1500", ["BC", "BC"], 2),
+              new Player("Rob25", "fold", "$275", ["BC", "BC"], 3),
+              new Player("Sue182", "fold", "$990", ["BC", "BC"], 4),
+              new Player("Jack77", "Check", "$1000", ["GC", "GC"], 5),
+              new Player("Jack77", "Check", "$1000", ["BC", "BC"],6)];
     this.setOtherPlayers(p);
     this.drawOtherPlayers();
 
     this.refreshBoard();
+  }
+
+  public userAction(action) {
+    // if (this.user.turnOrder !== this.currentTurnOrder) {
+    //   return;
+    // }
+
+    const url = 'https://pokerapp.cfapps.io/currentHands/action';
+    const xhr = new XMLHttpRequest();
+
+    xhr.open('POST', url, true);
+    xhr.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) { }
+      console.log(action)
+
+      xhr.send(action);
+    };
   }
 
   drawPot() {
@@ -97,14 +115,16 @@ export class GameboardComponent implements OnInit {
         if (this.readyState === 4 && this.status === 200) {
           let response = JSON.parse(xhr.responseText);
           console.log(response);
+          obj.currentTurnOrder = response.user.user.gameStates.currentTurn;
+          obj.pot = response.otherPlayers[0].user.gameStates.pot;
           let newUser = new Player(response.user.user.username, response.user.status,
-                                   response.user.winnings, response.user.hand.split(' '));
+                                   response.user.winnings, response.user.hand.split(' '), response.user.playerOrder);
           obj.user = newUser;
 
           let players = response.otherPlayers;
           let p = [];
           for (let i = 0; i < players.length; i++) {
-            p.push(new Player(players[i].user.username, players[i].status, players[i].winnings, players[i].hand.split(' ')));
+            p.push(new Player(players[i].user.username, players[i].status, players[i].winnings, players[i].hand.split(' '), players[i].playerOrder));
           }
           obj.otherPlayers = p;
 

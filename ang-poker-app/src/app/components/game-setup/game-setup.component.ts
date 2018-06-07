@@ -44,6 +44,19 @@ export class GameSetupComponent implements OnInit {
     });
   }
 
+  public userAction() {
+
+    const url = 'url';
+    const xhr = new XMLHttpRequest();
+
+    xhr.open('POST', url, true);
+    xhr.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+
+      }
+    };
+  }
+
   public addFriendsToArr(user: UserInfo) {
 
     if (this.friendsToInvite.includes(user.username)) {
