@@ -46,6 +46,7 @@ public class CurrentHandsController {
 		return resp;
 	}
 	
+	@CrossOrigin
 	@GetMapping("/getFullGameState/{i}")
 	@ResponseBody
 	public ResponseEntity<FullGameState> getGameState(@PathVariable int i) {	
@@ -54,14 +55,17 @@ public class CurrentHandsController {
 			"", //1
 			"", //2
 			"", //3
-			"AH QS KD", //4
-			"AH QS KD", //5
-			"AH QS KD", //6
-			"AH QS KD", //7
-			"AH QS KD JS", //8
-			"AH QS KD JS", //9
-			"AH QS KD JS", //10
-			"AH QS KD JS 9H", //11
+			"", //4
+			"AH QS KS", //5
+			"AH QS KS", //6
+			"AH QS KS", //7
+			"AH QS KS", //8
+			"AH QS KS JS", //9
+			"AH QS KS JS", //10
+			"AH QS KS JS 9H", //11
+			"AH QS KS JS 9H", //12
+			"AH QS KS JS 9H", //13
+			"AH QS KS JS 9H", //14
 		};
 		
 		GameStates[] g = { 
@@ -70,13 +74,16 @@ public class CurrentHandsController {
 				new GameStates("", 0, 250, 0, 0, tableStates[i]), //2
 				new GameStates("", 0, 500, 0, 0, tableStates[i]), //3
 				new GameStates("", 0, 750, 0, 0, tableStates[i]), //4
-				new GameStates("", 0, 1250, 0, 0, tableStates[i]), //5
-				new GameStates("", 0, 1250, 0, 0, tableStates[i]), //6
-				new GameStates("", 0, 1250, 0, 0, tableStates[i]), //7
-				new GameStates("", 0, 1250, 0, 0, tableStates[i]), //8
-				new GameStates("", 0, 1250, 0, 0, tableStates[i]) //9
-				new GameStates("", 0, 1250, 0, 0, tableStates[i]) //10
-				new GameStates("", 0, 1450, 0, 0, tableStates[i]) //11
+				new GameStates("", 0, 750, 0, 0, tableStates[i]), //5
+				new GameStates("", 0, 850, 0, 0, tableStates[i]), //6
+				new GameStates("", 0, 1350, 0, 0, tableStates[i]), //7
+				new GameStates("", 0, 1850, 0, 0, tableStates[i]), //8
+				new GameStates("", 0, 2350, 0, 0, tableStates[i]), //9
+				new GameStates("", 0, 2350, 0, 0, tableStates[i]), //10
+				new GameStates("", 0, 2350, 0, 0, tableStates[i]), //11
+				new GameStates("", 0, 2350, 0, 0, tableStates[i]), //12
+				new GameStates("", 0, 2350, 0, 0, tableStates[i]), //13
+				new GameStates("", 0, 2350, 0, 0, tableStates[i]) //14
 		};
 		
 		Users kevin = new Users(0, g[i], "", "", "", "", "kMagno", false);
@@ -90,13 +97,16 @@ public class CurrentHandsController {
 				new CurrentHands(kevin, "AC 3H", 750, false, 0), //2
 				new CurrentHands(kevin, "AC 3H", 750, false, 0), //3
 				new CurrentHands(kevin, "AC 3H", 750, false, 0), //4
-				new CurrentHands(kevin, "AC 3H", 250, false, 0), //5
-				new CurrentHands(kevin, "AC 3H", 250, false, 0), //6
-				new CurrentHands(kevin, "AC 3H", 250, false, 0), //7
+				new CurrentHands(kevin, "AC 3H", 750, false, 0), //5
+				new CurrentHands(kevin, "AC 3H", 750, false, 0), //6
+				new CurrentHands(kevin, "AC 3H", 750, false, 0), //7
 				new CurrentHands(kevin, "AC 3H", 250, false, 0), //8
-				new CurrentHands(kevin, "AC 3H", 250, false, 0), //9
-				new CurrentHands(kevin, "AC 3H", 250, false, 0), //10
-				new CurrentHands(kevin, "AC 3H", 250, false, 0), //11
+				new CurrentHands(kevin, "AC 3H", 750, false, 0), //9
+				new CurrentHands(kevin, "AC 3H", 750, false, 0), //10
+				new CurrentHands(kevin, "AC 3H", 750, false, 0), //11
+				new CurrentHands(kevin, "AC 3H", 750, false, 0), //12
+				new CurrentHands(kevin, "AC 3H", 750, false, 0), //13
+				new CurrentHands(kevin, "AC 3H", 750, false, 0), //14
 		};
 		
 		CurrentHands[][] currHands = {
@@ -104,12 +114,12 @@ public class CurrentHandsController {
 				 new CurrentHands(jj, "BC BC", 1000, false, 1),
 				 new CurrentHands(angela, "BC BC", 1000,false, 1)}, //0
 				
-				{new CurrentHands(ian, "AC AC", 1000, false, 1),
+				{new CurrentHands(ian, "CC CC", 1000, false, 1),
 					 new CurrentHands(jj, "BC BC", 1000, false, 1),
 					 new CurrentHands(angela, "BC BC", 1000,false, 1)}, //1
 				 
 				 {new CurrentHands(ian, "GC GC", 1000, false, 1),
-					 new CurrentHands(jj, "AC AC", 1000, false, 1),
+					 new CurrentHands(jj, "CC CC", 1000, false, 1),
 					 new CurrentHands(angela, "BC BC", 1000,false, 1)}, //2
 				 
 				 {new CurrentHands(ian, "GC GC", 1000, false, 1),
@@ -125,29 +135,41 @@ public class CurrentHandsController {
 					 new CurrentHands(angela, "BC BC", 750,false, 1)}, //5
 				 
 				 {new CurrentHands(ian, "GC GC", 1000, false, 1),
-				  new CurrentHands(jj, "GC GC", 750, false, 1),
+				  new CurrentHands(jj, "BC BC", 650, false, 1),
 				  new CurrentHands(angela, "CC CC", 750,false, 1)}, //6
 				 
 				 {new CurrentHands(ian, "GC GC", 1000, false, 1),
-				  new CurrentHands(jj, "GC GC", 750, false, 1),
+				  new CurrentHands(jj, "BC BC", 750, false, 1),
 				  new CurrentHands(angela, "BC BC", 250,false, 1)}, //7
 				 
 				 {new CurrentHands(ian, "GC GC", 1000, false, 1),
-				  new CurrentHands(jj, "GC GC", 750, false, 1),
-				  new CurrentHands(angela, "AC AC", 250,false, 1)}, //8
+				  new CurrentHands(jj, "CC CC", 750, false, 1),
+				  new CurrentHands(angela, "BC BC", 250,false, 1)}, //8
 				 
 				 {new CurrentHands(ian, "GC GC", 1000, false, 1),
-					  new CurrentHands(jj, "GC GC", 750, false, 1),
-					  new CurrentHands(angela, "BC BC", 250,false, 1)}, //9
+					  new CurrentHands(jj, "BC BC", 250, false, 1),
+					  new CurrentHands(angela, "CC CC", 250,false, 1)}, //9
 				 
 				 {new CurrentHands(ian, "GC GC", 1000, false, 1),
-						  new CurrentHands(jj, "GC GC", 750, false, 1),
-						  new CurrentHands(angela, "AC AC", 250,false, 1)}, //10
+						  new CurrentHands(jj, "BC BC", 250, false, 1),
+						  new CurrentHands(angela, "BC BC", 250,false, 1)}, //10
 				 
 				 {new CurrentHands(ian, "GC GC", 1000, false, 1),
-							  new CurrentHands(jj, "GC GC", 750, false, 1),
-							  new CurrentHands(angela, "BC BC", 50,false, 1)}, //10
-					 
+							  new CurrentHands(jj, "CC CC", 250, false, 1),
+							  new CurrentHands(angela, "BC BC", 250,false, 1)}, //11
+				 
+				 {new CurrentHands(ian, "GC GC", 1000, false, 1),
+								  new CurrentHands(jj, "BC BC", 250, false, 1),
+								  new CurrentHands(angela, "CC CC", 250,false, 1)}, //12
+				 
+				 {new CurrentHands(ian, "GC GC", 1000, false, 1),
+									  new CurrentHands(jj, "BC BC", 250, false, 1),
+									  new CurrentHands(angela, "BC BC", 250,false, 1)}, //13
+				 
+				 {new CurrentHands(ian, "GC GC", 1000, false, 1),
+										  new CurrentHands(jj, "TS AS", 250, false, 1),
+										  new CurrentHands(angela, "QC KC", 250,false, 1)}, //14
+								  
 		};
 		
 		ArrayList<CurrentHands> list = new ArrayList<>();
