@@ -32,6 +32,7 @@ import com.revature.requestHelper.UserLogin;
 import com.revature.service.GameStatesService;
 import com.revature.service.UsersService;
 
+@CrossOrigin
 @Controller("usersController")
 @RequestMapping("/users")
 public class UsersController extends HttpServlet {

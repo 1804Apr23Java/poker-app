@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.revature.beans.CurrentHands;
@@ -26,9 +26,16 @@ import com.revature.service.CurrentHandsService;
 import com.revature.service.GameStatesService;
 import com.revature.service.UsersService;
 
+@EnableWebMvc
+@CrossOrigin
 @Controller("currentHandsController")
 @RequestMapping("/currentHands")
 public class CurrentHandsController extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Autowired
 	private CurrentHandsService currentHandsService;
@@ -127,7 +134,7 @@ public class CurrentHandsController extends HttpServlet {
 //	}
 	
 	@CrossOrigin
-	@RequestMapping("/action/{action}")
+	@RequestMapping("/actions/{action}")
 	@ResponseBody
     public RedirectView logout(@PathVariable String action, HttpSession session) {
         System.out.println(action);
@@ -166,6 +173,17 @@ public class CurrentHandsController extends HttpServlet {
 
         RedirectView redirectView = new RedirectView();
 		redirectView.setUrl("http://localhost:4200/gameboard/");
+		return redirectView;
+    }
+	
+	@CrossOrigin
+	@RequestMapping(value="/action/{action}")
+    public RedirectView redirectTest(@PathVariable String action, HttpSession session) {
+        session.invalidate();
+        System.out.println(action);
+
+        RedirectView redirectView = new RedirectView();
+		redirectView.setUrl("http://localhost:4200/login/");
 		return redirectView;
     }
 }
