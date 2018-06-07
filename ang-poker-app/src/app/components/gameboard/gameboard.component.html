@@ -1,2 +1,20 @@
-<p>This is the canvas!</p>
-<canvas id="thisCanvas" width="1200" height = "600"></canvas>
+<div class="container">
+  <div class="row">
+    <div class="col align-self-start">
+    </div>
+    <div class="col align-self-center">
+      <canvas id="thisCanvas" width="1200" height = "600"></canvas>
+      <div>
+        <span >
+          <!-- <form id="formAction"> -->
+            <input id="check" type="submit" name="check" (click)="userAction('bet')" type="button" class="btn btn-primary m-5" value="Check">
+            <input  id="bet" type="submit" name="bet" (click)="userAction('check')" type="button" class="btn btn-success m-5" value="Bet">
+            <input id="fold" type="submit" name="fold" (click)="userAction('fold')" type="button" class="btn btn-danger m-5" value="Fold">
+          <!-- </form> -->
+
+        </span>
+      </div>
+
+    </div>
+  </div>
+</div>

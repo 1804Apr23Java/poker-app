@@ -7,13 +7,11 @@ import { RegisterComponent } from '../components/register/register.component';
 import { LoginComponent } from '../components/login/login.component';
 import { NavbarComponent } from '../components/navbar/navbar.component';
 import { HomepageComponent } from '../components/homepage/homepage.component';
-
 import { UserProfileComponent } from '../components/user-profile/user-profile.component';
 import { EditProfileComponent } from '../components/edit-profile/edit-profile.component';
-
 import { EditPasswordComponent } from '../components/edit-password/edit-password.component';
-
 import { GameSetupComponent } from '../components/game-setup/game-setup.component';
+import { GameboardComponent } from '../components/gameboard/gameboard.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
@@ -23,7 +21,8 @@ const appRoutes: Routes = [
   { path: 'profile', component: UserProfileComponent },
   { path: 'edit-email', component: EditProfileComponent },
   { path: 'edit-password', component: EditPasswordComponent },
-  { path: 'create-game', component: GameSetupComponent }
+  { path: 'create-game', component: GameSetupComponent },
+  { path: 'gameboard', component: GameboardComponent }
 
 ];
 
