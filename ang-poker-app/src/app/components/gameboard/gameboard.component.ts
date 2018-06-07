@@ -42,7 +42,7 @@ export class GameboardComponent implements OnInit {
   // userid: this.userInfo.user.userId
 
   ngOnInit() {
-
+    this.pot = 0;
     this.getUserInformation();
     this.nav.show();
 
@@ -70,6 +70,18 @@ export class GameboardComponent implements OnInit {
 
     this.refreshBoard();
   }
+
+  drawPot() {
+    let x = (this.width / 6);
+    let y = this.halfHeight;
+
+    this.ctx.fillStyle = 'gold';
+    this.ctx.font = (this.cardWidth / 2) + 'px fancy';
+
+    this.ctx.textAlign = 'center';
+    this.ctx.fillText('$' + this.pot, x, y);
+  }
+
   refreshBoard() {
     setInterval(() => {
       const url: string = "https://pokerapp.cfapps.io/currentHands/getFullGameState/" + this.userInfo.user.userId;
@@ -341,6 +353,8 @@ export class GameboardComponent implements OnInit {
   private getClosure(image: HTMLImageElement, x: number, y:number, dx:number, dy:number): any {
     return () => {
       this.ctx.drawImage(image, x, y, dx, dy);
+      this.drawPot();
+
     };
   }
 
