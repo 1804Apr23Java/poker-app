@@ -143,17 +143,6 @@ public class UsersController extends HttpServlet {
 		return redirectView;
 	}
 	
-//	@CrossOrigin
-//	@RequestMapping(value = "/logout", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-//    public RedirectView logout(HttpServletRequest request) {
-//    	httpSession = request.getSession();
-//    	httpSession.invalidate();
-//    	RedirectView redirectView = new RedirectView();
-//		redirectView.setUrl("http://localhost:4200/login/");
-//		
-//		return redirectView;
-//    }
-	
 	@CrossOrigin
 	@RequestMapping("/logout")
     @ResponseBody

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,17 +23,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.revature.beans.CurrentHands;
 import com.revature.beans.FullGameState;
 import com.revature.beans.Users;
+import com.revature.requestHelper.UserAction;
 import com.revature.service.CurrentHandsService;
 import com.revature.service.GameStatesService;
 import com.revature.service.UsersService;
 
 @Controller("currentHandsController")
 @RequestMapping("/currentHands")
-public class CurrentHandsController {
+public class CurrentHandsController extends HttpServlet {
 
 	@Autowired
 	private CurrentHandsService currentHandsService;
@@ -81,9 +84,12 @@ public class CurrentHandsController {
 		return new ResponseEntity<>(game, HttpStatus.OK);
 	}
 
+//	@ResponseStatus(HttpStatus.OK)
+	
 	@CrossOrigin
 	@RequestMapping(value = "/action", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public ResponseEntity<CurrentHands> userAction(@RequestBody MultiValueMap<String, String> formParams, HttpServletRequest request,
+	@ResponseBody
+	public RedirectView userAction(@RequestBody MultiValueMap<String, String> formParams, HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("form params received " + formParams);
 
@@ -94,32 +100,11 @@ public class CurrentHandsController {
 
 		String action = formParams.getFirst("name");
 		
-		// Increment Player Order
-		currentHand.getUser().getGameStates().setCurrentTurn(currentHand.getPlayerOrder()+1);
+		String status = UserAction.checkUserAction(action, currentHand);
+		System.out.println(status);
 
-		if (action.equals("check")) {
-			// Do nothing
-			//Save changes to DB
-			gameStatesService.updateGameState(currentHand.getUser().getGameStates());
-			System.out.println("User has checked!");
-		} else if (action.equals("bet")) {
-			// Bet $25
-			currentHand.setWinnings(currentHand.getWinnings()-25);
-			// Add $25 to the pot
-			currentHand.getUser().getGameStates().setPot(currentHand.getUser().getGameStates().getPot()+25);
-			//Save changes to DB
-			gameStatesService.updateGameState(currentHand.getUser().getGameStates());
-			currentHandsService.updateCurrentHand(currentHand);
-			System.out.println("User has bet!");
-			System.out.println(currentHand);
-		} else if (action.equals("fold")) {
-			// Fold Hand
-			currentHand.setHasFolded(true);
-			currentHandsService.updateCurrentHand(currentHand);
-			System.out.println("User Has Folded!");
-			System.out.println(currentHand);
-		}
-
-		return new ResponseEntity<>(currentHand, HttpStatus.OK);
+		RedirectView redirectView = new RedirectView();
+		redirectView.setUrl("http://localhost:4200/login/");
+		return redirectView;
 	}
 }
