@@ -17,6 +17,8 @@ export class GameboardComponent implements OnInit {
   public userInfo: Statistics;
   public currentTurnOrder: number;
 
+  private counter: number;
+
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
 
@@ -39,6 +41,7 @@ export class GameboardComponent implements OnInit {
   private pot: number;
 
   constructor(public nav: NavBarService, private userStatsService: UserStatsService, private userActionService: UserActionService) {
+    this.counter = 0;
   }
 
   // userid: this.userInfo.user.userId
@@ -51,24 +54,24 @@ export class GameboardComponent implements OnInit {
     this.setCanvas(<HTMLCanvasElement> document.getElementById('thisCanvas'));
     this.drawBoardBackground();
 
-    let user = new Player("Jack77", "Check", "$1000", ["JH", "7H"], 0);
-    this.setUser(user);
-
-    this.drawUserHand();
-    this.drawUserInfo();
-
-    let board = ['KH', 'QS', '6D', 'JC', 'TD'];
-    this.setBoard(board);
-    this.drawBoard();
-
-    let p = [ new Player("Jack777777777777777", "Check", "$1000", ["KD", "6S"], 1),
-              new Player("Jane01", "Raise 250", "$1500", ["BC", "BC"], 2),
-              new Player("Rob25", "fold", "$275", ["BC", "BC"], 3),
-              new Player("Sue182", "fold", "$990", ["BC", "BC"], 4),
-              new Player("Jack77", "Check", "$1000", ["GC", "GC"], 5),
-              new Player("Jack77", "Check", "$1000", ["BC", "BC"],6)];
-    this.setOtherPlayers(p);
-    this.drawOtherPlayers();
+    // let user = new Player("Jack77", "Check", "$1000", ["JH", "7H"], 0);
+    // this.setUser(user);
+    //
+    // this.drawUserHand();
+    // this.drawUserInfo();
+    //
+    // let board = ['KH', 'QS', '6D', 'JC', 'TD'];
+    // this.setBoard(board);
+    // this.drawBoard();
+    //
+    // let p = [ new Player("Jack777777777777777", "Check", "$1000", ["KD", "6S"], 1),
+    //           new Player("Jane01", "Raise 250", "$1500", ["BC", "BC"], 2),
+    //           new Player("Rob25", "fold", "$275", ["BC", "BC"], 3),
+    //           new Player("Sue182", "fold", "$990", ["BC", "BC"], 4),
+    //           new Player("Jack77", "Check", "$1000", ["GC", "GC"], 5),
+    //           new Player("Jack77", "Check", "$1000", ["BC", "BC"],6)];
+    // this.setOtherPlayers(p);
+    // this.drawOtherPlayers();
 
     this.refreshBoard();
   }
@@ -108,9 +111,9 @@ export class GameboardComponent implements OnInit {
 
   refreshBoard() {
     setInterval(() => {
-      const url: string = "https://pokerapp.cfapps.io/currentHands/getFullGameState/" + this.userInfo.user.userId;
+      const url: string = "https://pokerapp.cfapps.io/currentHands/getFullGameState/" + this.counter++;
       this.sendAjaxGet(this, url)
-    }, 10000);
+    }, 4000);
 
   }
 
@@ -204,7 +207,7 @@ export class GameboardComponent implements OnInit {
   /* Draws the information for the player viewing the gameboard.
    */
   drawUserInfo() {
-    this.drawInfo(this.halfWidth, this.height - (this.margin / 1.1), this.user);
+    this.drawInfo(this.halfWidth, this.height - (this.margin / 1.3), this.user);
   }
 
    /* Sets the board cards.
@@ -216,6 +219,9 @@ export class GameboardComponent implements OnInit {
    /* Draws the board cards on the center of the gameboard.
     */
   drawBoard() {
+    if (this.board.length < 1) {
+      return;
+    }
     let numCards = this.board.length;
 
     //Calculate the starting coordinates for the cards
@@ -296,7 +302,7 @@ export class GameboardComponent implements OnInit {
 
       //First player
       let x = (this.halfWidth - (totalWidth / 2)) + (((this.cardWidth * 2) + this.cardSpace) / 2);
-      let y = this.height - (this.margin / 1.1);
+      let y = this.height - (this.margin / 1.2);
       this.drawInfo(x, y, this.otherPlayers[0]);
 
       let jump = (((this.cardWidth * 2) + this.cardSpace)/ 2);
@@ -310,13 +316,13 @@ export class GameboardComponent implements OnInit {
 
       //Last player
       x = (this.halfWidth + (totalWidth / 2)) - jump;
-      y = this.height - (this.margin / 1.1);
+      y = this.height - (this.margin / 1.2);
       this.drawInfo(x, y, this.otherPlayers[numPlayers - 1]);
     } else {
       let jump = (((this.cardWidth * 2) + this.cardSpace)/ 2);
       let totalWidth = ((this.cardWidth * 2) * numPlayers) + (this.cardSpace * numPlayers) + (this.playerSapce * (numPlayers - 1));
       let startX = (this.halfWidth - (totalWidth / 2)) + jump;
-      let startY = 2;
+      let startY = 7;
 
       for(let i = 0; i < numPlayers; i++) {
         this.drawInfo(startX, startY, this.otherPlayers[i]);
@@ -345,7 +351,9 @@ export class GameboardComponent implements OnInit {
     x += size + (maxUserWidth / 2);
     y += (this.margin / 2);
     this.ctx.textAlign = 'center';
-    this.ctx.fillText(p.username, x, y, maxUserWidth);
+    this.ctx.fillText(p.username, x, y - (this.margin / 3.5), maxUserWidth);
+    this.ctx.fillText(p.winnings, x, y, maxUserWidth);
+
 
     x+= (maxUserWidth / 2);
     y -= (this.margin / 2);
